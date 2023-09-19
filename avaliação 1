@@ -1,0 +1,50 @@
+clientes = {}
+
+print("Bem vindo ao I Hair Location.")
+
+def cadastrar_cliente():
+    nome = input("Digite o nome do cliente: ")
+    telefone = input("Digite o telefone do cliente: ")
+    clientes[telefone] = {'nome': nome, 'agendamentos': []}
+    print(f"Cliente {nome} cadastrado com sucesso!")
+
+def agendar_horario(telefone):
+    if telefone in clientes:
+        nome = clientes[telefone]['nome']
+        horario = input("Digite o horário desejado: (00:00)")
+        clientes[telefone]['agendamentos'].append(horario)
+        data = input("Digite o dia: (0/0)")
+        clientes[telefone]['agendamentos'].append(data)
+        print(f"Horário agendado para o cliente {nome} no horário {horario} e dia {data}")
+    else:
+        print("Cliente não encontrado. Faça o cadastro primeiro.")
+
+lista_cadastrados = []
+
+while True:
+    print("\nOpções:")
+    print("1 - Cadastrar cliente")
+    print("2 - Agendar horário")
+    print("3 - Lista de Cadastrados")
+    print("4 - Sair")
+    opcao = input("Escolha uma opção (1/2/3/4): ")
+
+    if opcao == '1':
+        cadastrar_cliente()
+    elif opcao == '2':
+        telefone = input("Digite o telefone do cliente para agendar um horário: ")
+        agendar_horario(telefone)
+    elif opcao == '3':
+        print("\nLista de Clientes Cadastrados:")
+        for telefone, cliente in clientes.items():
+            print(f"Nome: {cliente['nome']}, Telefone: {telefone}")
+    elif opcao == '4':
+        break
+    else:
+        print("Opção inválida. Escolha uma opção válida.")
+
+print("\nClientes cadastrados e agendamentos:")
+for telefone, cliente in clientes.items():
+    print(f"Cliente: {cliente['nome']}, Telefone: {telefone}, Agendamentos: {cliente['agendamentos']}")
+
+print("\nObrigado por utilizar e fazer parte do I Hair Location.")
